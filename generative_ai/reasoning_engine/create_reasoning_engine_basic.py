@@ -29,8 +29,6 @@ class SimpleAdditionApp:
         return f"{int(a)} + {int(b)} is {int(a+b)}" 
 
 
-
-
 def generate_content(PROJECT_ID: str, REGION: str, STAGING_BUCKET: str) -> object:
     # [START generativeaionvertexai_create_reasoning_engine_basic]
     import vertexai

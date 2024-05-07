@@ -79,7 +79,7 @@ def generate_content(PROJECT_ID: str, REGION: str, STAGING_BUCKET: str) -> objec
     return remote_app
 
 if __name__ == "__main__":
-    # Locally test app
+    # Locally test
     PROJECT_ID = 'your-project-id'
     REGION = 'us-central1'
 
