@@ -16,7 +16,10 @@ from vertexai.generative_models import GenerationResponse
 
 
 def generate_function_call(project_id: str) -> GenerationResponse:
+<<<<<<< HEAD
 
+=======
+>>>>>>> 92bc4fd631977b7bb302eb84fb025e176f72fef5
     # [START generativeaionvertexai_gemini_function_calling]
     import vertexai
     from vertexai.generative_models import (
@@ -28,10 +31,16 @@ def generate_function_call(project_id: str) -> GenerationResponse:
         Tool,
     )
 
+<<<<<<< HEAD
     # TODO(developer): Update and un-comment below lines
     # project_id = "PROJECT_ID"
 
     # Initialize Vertex AI
+=======
+    # Initialize Vertex AI
+    # TODO(developer): Update and un-comment below lines
+    # project_id = "PROJECT_ID"
+>>>>>>> 92bc4fd631977b7bb302eb84fb025e176f72fef5
     vertexai.init(project=project_id, location="us-central1")
 
     # Initialize Gemini model
@@ -120,6 +129,7 @@ def generate_function_call_advanced(project_id: str) -> GenerationResponse:
 
     # TODO(developer): Update and un-comment below lines
     # project_id = "PROJECT_ID"
+<<<<<<< HEAD
 
     # Initialize Vertex AI
     vertexai.init(project=project_id, location="us-central1")
@@ -167,6 +177,55 @@ def generate_function_call_advanced(project_id: str) -> GenerationResponse:
         )
     )
 
+=======
+
+    # Initialize Vertex AI
+    vertexai.init(project=project_id, location="us-central1")
+
+    # Specify a function declaration and parameters for an API request
+    get_product_sku_func = FunctionDeclaration(
+        name="get_product_sku",
+        description="Get the available inventory for a Google products, e.g: Pixel phones, Pixel Watches, Google Home etc",
+        # Function parameters are specified in OpenAPI JSON schema format
+        parameters={
+            "type": "object",
+            "properties": {
+                "product_name": {"type": "string", "description": "Product name"}
+            },
+        },
+    )
+
+    # Specify another function declaration and parameters for an API request
+    get_store_location_func = FunctionDeclaration(
+        name="get_store_location",
+        description="Get the location of the closest store",
+        # Function parameters are specified in OpenAPI JSON schema format
+        parameters={
+            "type": "object",
+            "properties": {"location": {"type": "string", "description": "Location"}},
+        },
+    )
+
+    # Define a tool that includes the above functions
+    retail_tool = Tool(
+        function_declarations=[
+            get_product_sku_func,
+            get_store_location_func,
+        ],
+    )
+
+    # Define a tool config for the above functions
+    retail_tool_config = ToolConfig(
+        function_calling_config=ToolConfig.FunctionCallingConfig(
+            # ANY mode forces the model to predict a function call
+            mode=ToolConfig.FunctionCallingConfig.Mode.ANY,
+            # List of functions that can be returned when the mode is ANY.
+            # If the list is empty, any declared function can be returned.
+            allowed_function_names=["get_product_sku"],
+        )
+    )
+
+>>>>>>> 92bc4fd631977b7bb302eb84fb025e176f72fef5
     model = GenerativeModel(
         "gemini-1.5-pro-preview-0409",
         tools=[retail_tool],
